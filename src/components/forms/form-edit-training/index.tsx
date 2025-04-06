@@ -16,10 +16,13 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { EditTraininigInfo } from "./edit-traininig-info"
 import { ExerciseItem } from "./exercise-item"
+import { useRouter } from "next/navigation"
 
 export const FormEditTraining = ({
     training: { name, obs, exercises },
 }: { training: TrainingWithExercise }) => {
+
+    const { back } = useRouter()
 
     const methods = useForm<EditTrainingProps>({
         resolver: zodResolver(editTrainingSchema),
@@ -105,10 +108,18 @@ export const FormEditTraining = ({
                         </CardFooter>
                     </Card>
                 </CardContent>
-                <CardFooter>
+                <CardFooter className="justify-end gap-2">
+                    <Button
+                        type="button"
+                        variant={"destructive"}
+                        className="w-1/2"
+                        onClick={back}
+                    >
+                        Voltar
+                    </Button>
                     <Button
                         type="submit"
-                        className="w-full"
+                        className="w-1/2"
                     >
                         Confirmar
                     </Button>

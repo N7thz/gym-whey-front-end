@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import { FormEditTraining } from "./forms/form-edit-training"
+import { api } from "@/http/api"
 
 export const GetTrainingById = ({ id }: { id: string }) => {
 
@@ -10,7 +11,7 @@ export const GetTrainingById = ({ id }: { id: string }) => {
         queryKey: ["find-training-by-id", id],
         queryFn: async () => {
 
-            const { data } = await axios.get(`/api/trainings/${id}`)
+            const { data } = await api.get(`/trainings/${id}`)
 
             return data
         },

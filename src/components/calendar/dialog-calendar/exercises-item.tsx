@@ -2,11 +2,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import type { Exercise } from "@/@types"
 
+type ExercisesItemProps = {
+    exercise: Omit<Exercise, "id">
+}
+
 export const ExercisesItem = ({
     exercise: {
         name, reps, series, toFailure
     }
-}: { exercise: Omit<Exercise, "id"> }) => {
+}: ExercisesItemProps) => {
     return (
         <Card className="rounded-md">
             <CardHeader>

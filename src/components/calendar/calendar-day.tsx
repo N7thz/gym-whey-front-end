@@ -4,6 +4,7 @@ import { useCalendar } from "./calendar-provider"
 import { TrainingWithExercise } from "@/@types"
 import { ScrollArea } from "../ui/scroll-area"
 import { DialogTitle, DialogTrigger, Dialog, DialogContent } from "../ui/dialog"
+import { DialogCalendarContent } from "./dialog-calendar/dialog-calendar-content"
 
 type CalendarDayProps = {
     day: Date
@@ -20,43 +21,41 @@ export const CalendarDay = ({
     const isCurrentMonth = isSameMonth(day, currentDate)
 
     return (
-        <Dialog>
-            <ScrollArea className={cn(
-                "h-[140px] p-2 border-2 rounded-md",
-                isToday && "border-violet-500 text-violet-500",
-                !isCurrentMonth && "text-muted-foreground border-muted border",
-            )}>
-                <div
-                    className="text-right"
-                    children={format(day, "d")}
-                />
-                <div>
-                    {
-                        trainings.map(({ id, madeAt, name }) => {
+        <ScrollArea className={cn(
+            "h-[140px] p-2 border-2 rounded-md",
+            isToday && "border-violet-500 text-violet-500",
+            !isCurrentMonth && "text-muted-foreground border-muted border",
+        )}>
+            <div
+                className="text-right"
+                children={format(day, "d")}
+            />
+            <div className="flex flex-col gap-1">
+                {
+                    trainings.map(training => {
 
-                            if (!isSameDay(new Date(madeAt), day)) return null
+                        const { id, madeAt, name } = training
 
-                            return (
-                                <Dialog key={id}>
-                                    <DialogTrigger>
-                                        <div
-                                            className={cn(
-                                                "text-xs truncate p-1 my-1 rounded-sm bg-primary/10"
-                                            )}
-                                            children={name}
-                                        />
-                                    </DialogTrigger>
-                                    <DialogContent>
-                                        <DialogTitle>
-                                            {name}
-                                        </DialogTitle>
-                                    </DialogContent>
-                                </Dialog>
-                            )
-                        })
-                    }
-                </div>
-            </ScrollArea>
-        </Dialog>
+                        const isNotSameDay = !isSameDay(new Date(madeAt), day)
+
+                        if (isNotSameDay) return null
+
+                        return (
+                            <Dialog key={id}>
+                                <DialogTrigger>
+                                    <div
+                                        className={cn(
+                                            "text-xs truncate p-1 rounded-sm bg-primary/10 text-start cursor-pointer"
+                                        )}
+                                        children={name}
+                                    />
+                                </DialogTrigger>
+                                <DialogCalendarContent training={training} />
+                            </Dialog>
+                        )
+                    })
+                }
+            </div>
+        </ScrollArea>
     )
 }
