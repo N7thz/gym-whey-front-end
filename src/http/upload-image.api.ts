@@ -7,5 +7,5 @@ type UploadImageRequest = UpdateUserProps & {
 }
 
 export function UploadImage({ id, imageUrl }: UploadImageRequest) {
-    return api.put<UserResponse>(`/upload-image/${id}`, { imageUrl })
+    return api.put<UserResponse>(`/update-image/${id}`, { imageUrl })
 }
