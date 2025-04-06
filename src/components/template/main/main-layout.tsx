@@ -1,10 +1,10 @@
 "use client"
 
-import { MainCalendar } from "@/components/calendar/main-calendar"
 import { MainList } from "@/components/template/main/main-list"
 import { api, useHttp } from "@/http/api"
 import { useQuery } from "@tanstack/react-query"
 import type { TrainingWithExercise } from "@/@types"
+import { CalendarView } from "@/components/calendar/calendar-view"
 
 export type MainProps = {
     data: TrainingWithExercise[] | undefined
@@ -24,13 +24,8 @@ export const MainLayout = ({ view }: { view: "calendar" | "list" }) => {
         }
     })
 
-    console.log(data)
-
     if (view === "calendar") return (
-        <MainCalendar
-            data={data}
-            isLoading={isLoading}
-        />
+        <CalendarView />
     )
 
     return (

@@ -12,9 +12,13 @@ import {
 	SidebarGroupContent,
 	SidebarGroupLabel,
 	SidebarMenu,
+	SidebarMenuButton,
+	SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { AsideSidebarItem } from "./aside-sidebar-item"
+import { Avatar } from "@/components/avatar"
 import type { Item } from "@/@types"
+import { SidebarAvatar } from "./sidebar-avatar"
 
 const items: Item[] = [
 	{
@@ -47,7 +51,7 @@ const items: Item[] = [
 export const AsideSidebar = () => {
 	return (
 		<Sidebar collapsible="icon">
-			<SidebarContent className="bg-background">
+			<SidebarContent className="bg-background justify-between">
 				<SidebarGroup>
 					<SidebarGroupLabel className="text-base font-light">
 						Opções do aplicativo
@@ -65,6 +69,7 @@ export const AsideSidebar = () => {
 						</SidebarMenu>
 					</SidebarGroupContent>
 				</SidebarGroup>
+				<SidebarAvatar />
 			</SidebarContent>
 		</Sidebar>
 	)

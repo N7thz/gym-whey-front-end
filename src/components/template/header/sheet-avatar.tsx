@@ -12,13 +12,14 @@ import {
 } from "@/components/ui/sheet"
 import { Avatar } from "@/components/avatar"
 import { FormUploadImage } from "@/components/forms/form-upload-image"
-import { useHeader } from "./use-header"
 import { useRouter } from "next/navigation"
+import { useCurrentUser } from "@/providers/user-provider"
+import { signOut } from "@/functions/sign-out"
 
 export const SheetAvatar = () => {
 	
 	const { refresh } = useRouter()
-	const { user, isLoading, isOpen, setIsOpen, signOut } = useHeader()
+	const { data: user, isLoading, isOpen, setIsOpen } = useCurrentUser()
 
 	if (!user || isLoading) return <Avatar src={null} />
 

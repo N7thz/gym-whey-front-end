@@ -5,13 +5,21 @@ import { useHttp } from "@/http/api"
 import { useQuery, type UseQueryResult } from "@tanstack/react-query"
 import { getCookie } from "cookies-next"
 import { useRouter } from "next/navigation"
-import { type ReactNode, createContext, useContext, useEffect } from "react"
+import { 
+    Dispatch,
+    type ReactNode, SetStateAction, createContext, useContext, useEffect, useState 
+} from "react"
 
-export type CurrentUserContextProps = UseQueryResult<UserResponse>
+export type CurrentUserContextProps = UseQueryResult<UserResponse> & {
+    isOpen: boolean
+    setIsOpen: Dispatch<SetStateAction<boolean>>
+}
 
 const CurrentUserContext = createContext({} as CurrentUserContextProps)
 
 export function CurrentUserProvider({ children }: { children: ReactNode }) {
+
+    const [isOpen, setIsOpen] = useState(false)
 
     const { refresh } = useRouter()
     const http = useHttp()
@@ -29,7 +37,11 @@ export function CurrentUserProvider({ children }: { children: ReactNode }) {
         if (response.isError) refresh()
     }, [response.isError, refresh])
 
-    const value: CurrentUserContextProps = response
+    const value: CurrentUserContextProps = {
+        ...response,
+        isOpen,
+        setIsOpen,
+    }
 
     return (
         <CurrentUserContext.Provider value={value}>
