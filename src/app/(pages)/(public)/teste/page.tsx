@@ -60,7 +60,7 @@ export default function Home() {
     console.log(errors)
 
     return (
-        <div className="h-dvh flex items-center justify-center p-8">
+        <div className=" flex items-center justify-center p-8">
             <CardShine className="w-1/2">
                 <CardHeader>
                     <CardTitle>

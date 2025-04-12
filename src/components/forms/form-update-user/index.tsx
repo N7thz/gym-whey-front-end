@@ -5,7 +5,7 @@ import { LabelEmail } from "@/components/forms/label-email"
 import { LabelImage } from "./label-image"
 import { Form } from "@/components/forms/form-primitive"
 import { useForm } from "react-hook-form"
-import { useCurrentUser } from "@/providers/user-provider"
+import { useCurrentUser } from "@/providers/user-current-provider"
 import {
     type UpdateUserProps, UpdateUserSchema,
 } from "@/schemas/update-user-schema"

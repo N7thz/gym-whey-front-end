@@ -5,7 +5,7 @@ import {
 } from "@/components/ui/card"
 import { Avatar } from "@/components/avatar"
 import { Separator } from "@/components/ui/separator"
-import { useCurrentUser } from "@/providers/user-provider"
+import { useCurrentUser } from "@/providers/user-current-provider"
 import { DialogUpdateUser } from "./dialog-update-user"
 import { DialogremoveUser } from "./dialog-remove-user"
 import { Loading } from "./loading"

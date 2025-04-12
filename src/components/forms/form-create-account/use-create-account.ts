@@ -7,6 +7,9 @@ import {
 	CreateAccountSchema,
 } from "@/schemas/create-account-schema"
 import { toast } from "@/components/toast"
+import { useMutation } from "@tanstack/react-query"
+
+type CreateAccountRequest = Omit<CreateAccountProps, "confirm_password">
 
 export function useCreateAccount() {
 
@@ -20,7 +23,7 @@ export function useCreateAccount() {
 	const {
 		handleSubmit,
 		watch,
-		formState: { errors, ...props },
+		formState: { errors },
 	} = methods
 
 	const password = watch("password")
@@ -32,26 +35,34 @@ export function useCreateAccount() {
 		password === confirm_password
 	)
 
-	function onSubmit({ email, password }: CreateAccountProps) {
-		http
-			.CreateAccount({ email, password })
-			.then(() => {
-				toast({
-					title: "O usuário foi criado com sucesso.",
-					variant: "sucess",
-				})
+	const { mutate, status } = useMutation({
+		mutationKey: ["create-account-props"],
+		mutationFn: async ({ email, password }: CreateAccountRequest) => {
+			return await http.CreateAccount({ email, password })
+		},			
+		onSuccess: () => {
 
-				setTimeout(() => push("/users"), 2000)
+			toast({
+				title: "O usuário foi criado com sucesso.",
+				variant: "sucess",
 			})
-			.catch(err => {
-				console.log(err)
 
-				toast({
-					title: "Erro ao criar usuário.",
-					variant: "error",
-				})
+			setTimeout(() => push("/sign-in"), 2000)
+		},
+		onError: (({ message }) => {
+
+			console.log(message)
+
+			toast({
+				title: "Erro ao criar usuário.",
+				variant: "error",
 			})
-	}
+		})
+	})
+
+	const isLoading = status === "pending" || status === "success"
+
+	const onSubmit = (formData: CreateAccountRequest) => mutate(formData)
 
 	return {
 		methods,
@@ -59,5 +70,6 @@ export function useCreateAccount() {
 		passwordsAreTheSame,
 		handleSubmit,
 		onSubmit,
+		isLoading
 	}
 }

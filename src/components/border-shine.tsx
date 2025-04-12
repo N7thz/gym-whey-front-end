@@ -8,7 +8,7 @@ type CardShineProps = ComponentProps<typeof Card> & {
 }
 
 export const CardShine = ({
-    shineColor = ["#A07CFE", "#FE8FB5", "#FFBE7B"],
+    shineColor = ["#6a0dad", "#8a2be2", "#dda0dd"],
     children,
     className,
     ...props

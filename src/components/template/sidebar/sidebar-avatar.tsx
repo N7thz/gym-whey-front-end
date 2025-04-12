@@ -7,7 +7,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { useCurrentUser } from "@/providers/user-provider"
+import { useCurrentUser } from "@/providers/user-current-provider"
 import { UserRound } from "lucide-react"
 
 export const SidebarAvatar = () => {

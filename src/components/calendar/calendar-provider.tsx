@@ -22,8 +22,8 @@ interface CalendarContextProps {
 }
 
 type BuildCalendarProps = {
-    year: number
     month: number
+    year: number
 }
 
 const CalendarContext = createContext({} as CalendarContextProps)
@@ -44,7 +44,6 @@ export function CalendarProvider({ children }: { children: ReactNode }) {
     function buildCalendar({ month, year }: BuildCalendarProps) {
 
         const monthStart = startOfMonth(new Date(year, month))
-        const monthEnd = endOfMonth(new Date(year, month))
 
         const gridStart = startOfWeek(monthStart)
         const gridEnd = endOfWeek(endOfMonth(new Date(year, month)))

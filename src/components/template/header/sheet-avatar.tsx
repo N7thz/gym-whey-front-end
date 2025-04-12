@@ -13,7 +13,7 @@ import {
 import { Avatar } from "@/components/avatar"
 import { FormUploadImage } from "@/components/forms/form-upload-image"
 import { useRouter } from "next/navigation"
-import { useCurrentUser } from "@/providers/user-provider"
+import { useCurrentUser } from "@/providers/user-current-provider"
 import { signOut } from "@/functions/sign-out"
 import { ModeToggle } from "../mode-toogle"
 

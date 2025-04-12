@@ -2,6 +2,7 @@
 
 import { UserResponse } from "@/@types"
 import { useHttp } from "@/http/api"
+import { decodeToken } from "@/utils/decode-token"
 import { useQuery, type UseQueryResult } from "@tanstack/react-query"
 import { getCookie } from "cookies-next"
 import { useRouter } from "next/navigation"
@@ -29,18 +30,19 @@ export function CurrentUserProvider({ children }: { children: ReactNode }) {
     const { refresh } = useRouter()
     const http = useHttp()
     const token = getCookie("token")
-
-    const queryKey = ["find-user", token]
-
+    const id = decodeToken(token)
+    
     const response = useQuery({
-        queryKey,
+        queryKey: ["find-user", id],
         queryFn: http.FindUser,
         refetchOnWindowFocus: false,
     })
 
+    console.log(response.status)
+
     useEffect(() => {
         response.status === "error" && refresh()
-    }, [response.isError, refresh])
+    }, [response.status, refresh])
 
     const value: CurrentUserContextProps = {
         ...response,

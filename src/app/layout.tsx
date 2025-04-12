@@ -1,14 +1,13 @@
 import type { Metadata } from "next"
-import { Oswald} from "next/font/google"
+import { JetBrains_Mono } from "next/font/google"
 import { ThemeProvider } from "@/providers/theme-provider"
 import { QueryProvider } from "@/providers/query-provider"
-import { CurrentUserProvider } from "@/providers/user-provider"
+import { CurrentUserProvider } from "@/providers/user-current-provider"
 import "./globals.css"
+import { cn } from "@/lib/utils"
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 
-const oswald = Oswald({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-})
+const jetBrains = JetBrains_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Whey Gym | Home",
@@ -21,21 +20,23 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="pt-BR"
-      suppressHydrationWarning
-    >
-      <body className={`${oswald.variable} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
+    <html lang="pt-BR">
+      <body className={cn(jetBrains.className, "antialiased h-dvh flex")}>
+        <ScrollArea
+          type="scroll"
+          className="size-full flex flex-1"
         >
-          <QueryProvider>
-            <CurrentUserProvider>
-              {children}
-            </CurrentUserProvider>
-          </QueryProvider>
-        </ThemeProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+          >
+            <QueryProvider>
+              <CurrentUserProvider>
+                {children}
+              </CurrentUserProvider>
+            </QueryProvider>
+          </ThemeProvider>
+        </ScrollArea>
       </body>
     </html>
   )

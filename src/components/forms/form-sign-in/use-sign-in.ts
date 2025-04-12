@@ -5,6 +5,7 @@ import { useHttp } from "@/http/api"
 import { setCookie } from "cookies-next"
 import { useRouter } from "next/navigation"
 import { toast } from "@/components/toast"
+import { useMutation } from "@tanstack/react-query"
 
 export function useSignIn() {
 
@@ -16,28 +17,38 @@ export function useSignIn() {
 		resolver: zodResolver(SigninSchema),
 	})
 
-	const { handleSubmit, register, formState: { errors } } = methods
+	const { handleSubmit, formState: { errors } } = methods
 
 	console.error(errors)
 
 	const oneDayInSeconds = 24 * 60 * 60
 
-	function onSubmit({ email, password }: SigninProps) {
-		http
-			.Signin({ email, password })
-			.then(({ data: { acess_token } }) => {
-				setCookie("token", acess_token, { maxAge: oneDayInSeconds })
-				refresh()
-			})
-			.catch(err => {
-				console.log(err)
+	const { mutate, status } = useMutation({
+		mutationFn: async (request: SigninProps) => {
 
-				toast({
-					title: "Email ou senha incorretos.",
-					variant: "error",
-				})
-			})
-	}
+			const { data: { acess_token } } = await http.Signin(request)
 
-	return { methods, handleSubmit, onSubmit, errors, register }
+			return { acess_token }
+		},
+		mutationKey: ["sign-in"],
+		onSuccess: ({ acess_token }) => {
+			setCookie("token", acess_token, { maxAge: oneDayInSeconds })
+			refresh()
+		},
+		onError: (({ message }) => {
+
+			console.log(message)
+
+			toast({
+				title: "Email ou senha incorretos.",
+				variant: "error",
+			})
+		})
+	})
+
+	const isLoading = status === "pending" || status === "success"
+
+	const onSubmit = (formData: SigninProps) => mutate(formData)
+
+	return { methods, handleSubmit, onSubmit, isLoading }
 }
