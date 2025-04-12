@@ -15,9 +15,10 @@ import { FormUploadImage } from "@/components/forms/form-upload-image"
 import { useRouter } from "next/navigation"
 import { useCurrentUser } from "@/providers/user-provider"
 import { signOut } from "@/functions/sign-out"
+import { ModeToggle } from "../mode-toogle"
 
 export const SheetAvatar = () => {
-	
+
 	const { refresh } = useRouter()
 	const { data: user, isLoading, isOpen, setIsOpen } = useCurrentUser()
 
@@ -47,6 +48,9 @@ export const SheetAvatar = () => {
 							</span>
 						</SheetDescription>
 					</SheetHeader>
+					<div className="px-6">
+						<ModeToggle />
+					</div>
 					<FormUploadImage
 						id={id}
 						oldImage={imageUrl}

@@ -5,9 +5,14 @@ import { useHttp } from "@/http/api"
 import { useQuery, type UseQueryResult } from "@tanstack/react-query"
 import { getCookie } from "cookies-next"
 import { useRouter } from "next/navigation"
-import { 
+import {
     Dispatch,
-    type ReactNode, SetStateAction, createContext, useContext, useEffect, useState 
+    SetStateAction,
+    createContext,
+    useContext,
+    useEffect,
+    useState,
+    type ReactNode,
 } from "react"
 
 export type CurrentUserContextProps = UseQueryResult<UserResponse> & {
@@ -34,7 +39,7 @@ export function CurrentUserProvider({ children }: { children: ReactNode }) {
     })
 
     useEffect(() => {
-        if (response.isError) refresh()
+        response.status === "error" && refresh()
     }, [response.isError, refresh])
 
     const value: CurrentUserContextProps = {

@@ -23,7 +23,7 @@ export const LabelPassword = ({ value, text }: LabelPasswordProps) => {
 	} = useFormContext<CreateAccountProps>()
 
 	return (
-		<Label htmlFor={value} className="flex flex-col gap-3 relative">
+		<Label htmlFor={value} className="flex flex-col gap-3 relative ">
 			{text}
 			<Input
 				id={value}

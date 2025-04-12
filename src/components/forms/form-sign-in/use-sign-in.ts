@@ -18,7 +18,7 @@ export function useSignIn() {
 
 	const { handleSubmit, register, formState: { errors } } = methods
 
-	console.error(methods.formState.errors)
+	console.error(errors)
 
 	const oneDayInSeconds = 24 * 60 * 60
 

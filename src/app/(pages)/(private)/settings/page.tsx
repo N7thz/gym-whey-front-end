@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function Config() {
     return (
-        <div className="flex-1 flex items-center justify-center bg-red-500">
+        <div className="flex-1 flex items-center justify-center">
             <Settings />
         </div>
     )

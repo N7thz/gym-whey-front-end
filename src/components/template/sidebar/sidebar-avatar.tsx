@@ -7,26 +7,23 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { Avatar } from "@/components/avatar"
 import { useCurrentUser } from "@/providers/user-provider"
 import { UserRound } from "lucide-react"
 
 export const SidebarAvatar = () => {
 
-    const { data: user, setIsOpen } = useCurrentUser()
-
-    const Icon = (user && user.imageUrl) ? Avatar : UserRound
+    const { setIsOpen } = useCurrentUser()
 
     return (
         <SidebarGroup>
             <SidebarGroupContent>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton>
-                            <Icon
-                                src={user?.imageUrl}
-                                onClick={() => setIsOpen(isOpen => !isOpen)}
-                            />
+                        <SidebarMenuButton
+                            onClick={() => setIsOpen(isOpen => !isOpen)}
+                            className="object-cover rounded-full"
+                        >
+                            <UserRound />
                         </SidebarMenuButton>
                     </SidebarMenuItem>
                 </SidebarMenu>

@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { ErrorSpan } from "@/components/error-span"
+import { ErrorSpan } from "@/components/template/error-span"
 import { cn } from "@/lib/utils"
 import { type FormUploadImageProps, useUploadImage } from "./use-upload-image"
 import Image from "next/image"

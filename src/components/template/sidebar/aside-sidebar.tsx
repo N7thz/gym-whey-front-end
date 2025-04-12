@@ -2,8 +2,6 @@ import {
 	Calendar,
 	Search,
 	Settings,
-	UserRoundPlus,
-	UsersRound,
 } from "lucide-react"
 import {
 	Sidebar,
@@ -12,29 +10,16 @@ import {
 	SidebarGroupContent,
 	SidebarGroupLabel,
 	SidebarMenu,
-	SidebarMenuButton,
-	SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { AsideSidebarItem } from "./aside-sidebar-item"
-import { Avatar } from "@/components/avatar"
-import type { Item } from "@/@types"
 import { SidebarAvatar } from "./sidebar-avatar"
+import type { Item } from "@/@types"
 
 const items: Item[] = [
 	{
 		title: "Home",
 		url: "/",
 		Icon: Calendar,
-	},
-	{
-		title: "Criar novo usuário",
-		url: "/create-account",
-		Icon: UserRoundPlus,
-	},
-	{
-		title: "Lista de usuários",
-		url: "/users",
-		Icon: UsersRound,
 	},
 	{
 		title: "Search",

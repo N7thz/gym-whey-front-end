@@ -15,7 +15,7 @@ export const LabelEmail = () => {
 	return (
 		<Label
 			htmlFor="email"
-			className="flex flex-col gap-3"
+			className="flex flex-col gap-3 "
 		>
 			Email:
 			<Input
