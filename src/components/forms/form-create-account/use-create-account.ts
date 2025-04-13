@@ -38,8 +38,10 @@ export function useCreateAccount() {
 	const { mutate, status } = useMutation({
 		mutationKey: ["create-account-props"],
 		mutationFn: async ({ email, password }: CreateAccountRequest) => {
-			return await http.CreateAccount({ email, password })
-		},			
+			return await http
+				.user
+				.create({ email, password })
+		},
 		onSuccess: () => {
 
 			toast({

@@ -24,9 +24,15 @@ export function useSignIn() {
 	const oneDayInSeconds = 24 * 60 * 60
 
 	const { mutate, status } = useMutation({
-		mutationFn: async (request: SigninProps) => {
+		mutationFn: async ({ email, password }: SigninProps) => {
 
-			const { data: { acess_token } } = await http.Signin(request)
+			const {
+				data: {
+					acess_token
+				}
+			} = await http
+				.authenticate
+				.signIn({ email, password })
 
 			return { acess_token }
 		},

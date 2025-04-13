@@ -1,13 +1,8 @@
-
-import axios from "axios"
 import { getCookie } from "cookies-next"
-import { CreateAccount } from "./create-account.api"
-import { remove } from "./remove.api"
-import { Signin } from "./sign-in.api"
-import { UpdateUser } from "./update-user.api"
-import { UploadImage } from "./upload-image.api"
-import { FindUser } from "./find-user.api"
-import { FindManyTrainigsByUserId } from "./find-many-trainings-by-user-id.api"
+import { User } from "./user.api"
+import { Authenticate } from "./authenticate.api"
+import { Training } from "./trainings.api"
+import axios from "axios"
 
 const token = getCookie("token")
 
@@ -19,13 +14,14 @@ export const api = axios.create({
 })
 
 export const useHttp = () => {
+
+	const user = new User()
+	const authenticate = new Authenticate()
+	const training = new Training()
+
 	return {
-		Signin,
-		CreateAccount,
-		UpdateUser,
-		remove,
-		UploadImage,
-		FindUser,
-		FindManyTrainigsByUserId
+		user,
+		authenticate,
+		training
 	}
 }

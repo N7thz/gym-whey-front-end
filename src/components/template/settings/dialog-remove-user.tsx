@@ -14,8 +14,9 @@ import { useCurrentUser } from "@/providers/user-current-provider"
 import { toast } from "@/components/toast"
 import { signOut } from "@/functions/sign-out"
 import { useRouter } from "next/navigation"
+import { ComponentProps } from "react"
 
-export const DialogremoveUser = () => {
+export const DialogremoveUser = (props: ComponentProps<typeof Button>) => {
 
     const http = useHttp()
     const { data: user } = useCurrentUser()
@@ -30,6 +31,7 @@ export const DialogremoveUser = () => {
 
     function removeUser(id: string) {
         http
+            .user
             .remove(id)
             .then(() => {
                 toast({
@@ -52,7 +54,7 @@ export const DialogremoveUser = () => {
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
-                <Button>
+                <Button {...props}>
                     <UserRoundX />
                     Excluir conta
                 </Button>

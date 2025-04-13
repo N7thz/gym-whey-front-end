@@ -9,6 +9,7 @@ import { useCurrentUser } from "@/providers/user-current-provider"
 import { DialogUpdateUser } from "./dialog-update-user"
 import { DialogremoveUser } from "./dialog-remove-user"
 import { Loading } from "./loading"
+import { CardShine } from "@/components/border-shine"
 
 export const Settings = () => {
 
@@ -20,7 +21,7 @@ export const Settings = () => {
 
     return (
         <div className="contents">
-            <Card className="w-3/7 h-1/4 flex-row gap-1">
+            <CardShine className="w-4/7 h-1/4 flex-row gap-1">
                 <CardContent className="self-start">
                     <Avatar
                         src={imageUrl}
@@ -38,17 +39,17 @@ export const Settings = () => {
                             <span>
                                 ROLE: {role}
                             </span>
-                            <span className="block whitespace-nowrap">
+                            <span className="block truncate">
                                 ID: {id}
                             </span>
                         </CardDescription>
                     </CardHeader>
                     <CardFooter className="w-full gap-2 justify-between">
-                        <DialogUpdateUser />
-                        <DialogremoveUser />
+                        <DialogUpdateUser className="w-1/2"/>
+                        <DialogremoveUser className="w-1/2"/>
                     </CardFooter>
                 </div>
-            </Card>
+            </CardShine>
         </div>
     )
 }

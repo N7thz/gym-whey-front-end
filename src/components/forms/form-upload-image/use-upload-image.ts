@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import { useHttp } from "@/http/api"
 import { toast } from "@/components/toast"
 import Icon from "@/app/icon.png"
+import { useMutation } from "@tanstack/react-query"
 
 export type FormUploadImageProps = {
     id: string
@@ -40,32 +41,41 @@ export function useUploadImage({
             ? imageUrl
             : Icon
 
+
+    const { mutate } = useMutation({
+        mutationKey: ["upload-image"],
+        mutationFn: ({ imageUrl }: UploadImageProps) => http.user.update({
+            id, imageUrl
+        }),
+        onSuccess: (() => {
+
+            setIsOpen(false)
+
+            toast({
+                title: "Imagem alterada com sucesso",
+                variant: "sucess",
+                position: "bottom-left"
+            })
+
+            setTimeout(() => refresh(), 2000)
+        }),
+        onError: (({ message }) => {
+            console.log(message)
+
+            reset({ imageUrl: oldImage ? oldImage : undefined })
+
+            toast({
+                title: "Erro ao atualizar a imagem.",
+                variant: "error",
+                position: "bottom-left"
+            })
+        })
+    })
+
+    const isLoading = status === "pending" || status === "success"
+
     function onSubmit({ imageUrl }: UploadImageProps) {
-        http
-            .UploadImage({ id, imageUrl })
-            .then(() => {
-
-                setIsOpen(false)
-
-                toast({
-                    title: "Imagem alterada com sucesso",
-                    variant: "sucess",
-                    position: "bottom-left"
-                })
-
-                setTimeout(() => refresh(), 2000)
-            })
-            .catch(err => {
-                console.log(err)
-
-                reset({ imageUrl: oldImage ? oldImage : undefined })
-
-                toast({
-                    title: "Erro ao atualizar a imagem.",
-                    variant: "error",
-                    position: "bottom-left"
-                })
-            })
+        mutate({ imageUrl })
     }
 
     return {
@@ -75,5 +85,6 @@ export function useUploadImage({
         handleSubmit,
         onSubmit,
         register,
+        isLoading
     }
 }

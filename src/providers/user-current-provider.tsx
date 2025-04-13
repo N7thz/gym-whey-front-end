@@ -34,7 +34,7 @@ export function CurrentUserProvider({ children }: { children: ReactNode }) {
     
     const response = useQuery({
         queryKey: ["find-user", id],
-        queryFn: http.FindUser,
+        queryFn: http.authenticate.authenticate,
         refetchOnWindowFocus: false,
     })
 
