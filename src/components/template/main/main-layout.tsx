@@ -1,8 +1,6 @@
 "use client"
 
-import { MainList } from "@/components/template/main/main-list"
-import { api } from "@/http/api"
-import { useQuery } from "@tanstack/react-query"
+import { ListView } from "@/components/template/main/list-view"
 import type { TrainingWithExercise } from "@/@types"
 import { CalendarView } from "@/components/calendar/calendar-view"
 
@@ -13,21 +11,7 @@ export type MainProps = {
 
 export const MainLayout = ({ view }: { view: "calendar" | "list" }) => {
 
-    const { data, isLoading } = useQuery({
-        queryKey: ["find-many-trainings-by-user-id"],
-        queryFn: async () => {
-            const { data } = await api.get<TrainingWithExercise[]>("/trainings")
-
-            return data
-        }
-    })
-
-    if (view === "list") return (
-        <MainList
-            data={data}
-            isLoading={isLoading}
-        />
-    )
+    if (view === "list") return <ListView />
 
     return <CalendarView />
 }

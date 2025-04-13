@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton"
 
-export const MainListLoading = () => {
+export const ListViewLoading = () => {
 	return (
 		<div className="space-y-3">
 			{

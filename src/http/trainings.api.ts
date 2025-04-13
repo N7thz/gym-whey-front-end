@@ -5,7 +5,7 @@ export class Training {
 
     async findMany() {
 
-        const { data } = await api.get<TrainingWithExercise>("/trainings")
+        const { data } = await api.get<TrainingWithExercise[]>("/trainings")
 
         return data
     }

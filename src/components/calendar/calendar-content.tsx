@@ -21,7 +21,9 @@ export const CalendarContent = () => {
     })
 
     if (isLoading || !trainings) return (
-        <div className="text-center">Loading...</div>
+        <div className="text-center">
+            Loading...
+        </div>
     )
 
     return (
