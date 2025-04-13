@@ -1,11 +1,10 @@
+"use client"
+
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { ListViewLoading } from "./main-list-loading"
+import { ListViewLoading } from "./list-view-loading"
 import { useHttp } from "@/http/api"
 import { useQuery } from "@tanstack/react-query"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Search } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { FormSearchTrainings } from "@/components/forms/form-search-trainings"
 
 export const ListView = () => {
 
@@ -22,20 +21,11 @@ export const ListView = () => {
 	return (
 		<Card className="space-y-3">
 			<CardHeader>
-				<Label
-					htmlFor="search_input"
-					className="flex items-center gap-2"
-				>
-					<Input
-						id="search_input"
-						type="search"
-					/>
-					<Search />
-				</Label>
+				<FormSearchTrainings defaultTrainings={trainings} />
 			</CardHeader>
 			<CardContent className="space-y-5">
 				{
-					trainings.map(({ id, name, exercises }) => (
+					trainings.map(({ id, exercises }) => (
 						<Card key={id}>
 							{id}
 							<div className="block">
