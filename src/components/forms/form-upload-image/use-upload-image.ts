@@ -53,7 +53,6 @@ export function useUploadImage({
 
             toast({
                 title: "Imagem alterada com sucesso",
-                variant: "sucess",
                 position: "bottom-left"
             })
 

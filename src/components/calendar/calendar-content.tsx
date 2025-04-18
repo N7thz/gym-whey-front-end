@@ -1,6 +1,6 @@
 import { CardContent } from "../ui/card"
 import { useCalendar } from "./calendar-provider"
-import { TrainingWithExercise } from "@/@types"
+import { Training } from "@/@types"
 import { api } from "@/http/api"
 import { useQuery } from "@tanstack/react-query"
 import { ScrollArea } from "../ui/scroll-area"
@@ -14,7 +14,7 @@ export const CalendarContent = () => {
         queryKey: ["find-many-trainings-by-user-id"],
         queryFn: async () => {
 
-            const { data } = await api.get<TrainingWithExercise[]>("/trainings")
+            const { data } = await api.get<Training[]>("/trainings")
 
             return data
         }

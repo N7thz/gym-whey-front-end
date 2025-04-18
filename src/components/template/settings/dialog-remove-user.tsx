@@ -34,10 +34,7 @@ export const DialogremoveUser = (props: ComponentProps<typeof Button>) => {
             .user
             .remove(id)
             .then(() => {
-                toast({
-                    title: "O usuário foi excluido com sucesso.",
-                    variant: "sucess",
-                })
+                toast({ title: "O usuário foi excluido com sucesso." })
 
                 setTimeout(() => signOut(refresh), 2000)
             })

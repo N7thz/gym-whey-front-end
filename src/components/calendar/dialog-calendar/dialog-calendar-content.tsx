@@ -3,12 +3,12 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog"
-import type { TrainingWithExercise } from "@/@types"
+import type { Training } from "@/@types"
 import { ExercisesItem } from "./exercises-item"
 import { DialogCalendarFooter } from "./dialog-calendar-footer"
 
 type DialogCalendarContentProps = {
-  training: TrainingWithExercise
+  training: Training
 }
 
 export const DialogCalendarContent = ({

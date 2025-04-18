@@ -1,14 +1,14 @@
 import { format, isSameMonth, isSameDay } from "date-fns"
 import { cn } from "@/lib/utils"
 import { useCalendar } from "./calendar-provider"
-import { TrainingWithExercise } from "@/@types"
+import { Training } from "@/@types"
 import { ScrollArea } from "../ui/scroll-area"
 import { DialogTitle, DialogTrigger, Dialog, DialogContent } from "../ui/dialog"
 import { DialogCalendarContent } from "./dialog-calendar/dialog-calendar-content"
 
 type CalendarDayProps = {
     day: Date
-    trainings: TrainingWithExercise[]
+    trainings: Training[]
 }
 
 export const CalendarDay = ({

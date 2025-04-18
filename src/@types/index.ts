@@ -33,22 +33,20 @@ export type GetResponse<T> = {
     count: number
 }
 
-export type Exercise = {
-    name: string
-    id: string
-    series: number
-    reps: number
-    toFailure: boolean
-    trainingId: string | null
+type Exercise = {
+    id: string;
+    name: string;
+    series: number;
+    reps: number;
+    toFailure: boolean;
+    trainingId: string | null;
 }
 
-export type TrainingWithExercise = {
-    name: string
+export type Training = {
     id: string
-    updatedAt: Date
+    name: string
     obs: string | null
     madeAt: Date
-    userId: string
-} & {
+    updatedAt: Date
     exercises: Exercise[]
 }

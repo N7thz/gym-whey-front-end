@@ -12,6 +12,7 @@ export const ExerciseItem = ({ index, remove }: ExerciseItemProps) => {
         <div className="w-full space-y-3 mt-6 border p-4 rounded-md">
             <LabelExercise
                 id="exercise_name"
+                type="text"
                 text="Nome do exercício"
                 registerProps={`exercises.${index}.name`}
             />

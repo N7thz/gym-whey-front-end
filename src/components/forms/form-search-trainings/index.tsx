@@ -6,7 +6,7 @@ import {
     Dialog, DialogContent, DialogFooter, DialogTitle, DialogTrigger
 } from "@/components/ui/dialog"
 import { useState } from "react"
-import { TrainingWithExercise } from "@/@types"
+import { Training } from "@/@types"
 import {
     Card, CardContent, CardDescription, CardHeader, CardTitle
 } from "@/components/ui/card"
@@ -15,7 +15,7 @@ import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 
 type FormSearchTrainingsProps = {
-    defaultTrainings: TrainingWithExercise[]
+    defaultTrainings: Training[]
 }
 
 export const FormSearchTrainings = ({
@@ -25,7 +25,7 @@ export const FormSearchTrainings = ({
     const [
         trainings,
         setTrainings
-    ] = useState<TrainingWithExercise[]>(defaultTrainings)
+    ] = useState<Training[]>(defaultTrainings)
 
     return (
         <Dialog>

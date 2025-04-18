@@ -44,10 +44,7 @@ export function useCreateAccount() {
 		},
 		onSuccess: () => {
 
-			toast({
-				title: "O usuário foi criado com sucesso.",
-				variant: "sucess",
-			})
+			toast({ title: "O usuário foi criado com sucesso." })
 
 			setTimeout(() => push("/sign-in"), 2000)
 		},

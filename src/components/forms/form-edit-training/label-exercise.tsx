@@ -2,6 +2,7 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { useFormContext } from "react-hook-form"
 import type { EditTrainingProps } from "@/schemas/edit-training-schema"
+import type { HTMLInputTypeAttribute } from "react"
 
 type RegisterProps =
     "obs" |
@@ -15,12 +16,14 @@ type RegisterProps =
 type LabelExerciseNameProps = {
     id: string
     text: string
+    type?: HTMLInputTypeAttribute
     registerProps: RegisterProps
 }
 
 export const LabelExercise = ({
     id,
     text,
+    type,
     registerProps
 }: LabelExerciseNameProps) => {
 
@@ -33,6 +36,7 @@ export const LabelExercise = ({
             </span>
             <Input
                 id={id}
+                type={type}
                 {...register(registerProps)}
             />
         </Label>

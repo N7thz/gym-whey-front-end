@@ -40,9 +40,13 @@ export function CurrentUserProvider({ children }: { children: ReactNode }) {
 
     console.log(response.status)
 
-    useEffect(() => {
-        response.status === "error" && refresh()
-    }, [response.status, refresh])
+    useEffect(() => refreshQuery(), [])
+
+    function refreshQuery() {
+        if (response.status === "error") {
+            refresh()
+        }
+    }
 
     const value: CurrentUserContextProps = {
         ...response,
