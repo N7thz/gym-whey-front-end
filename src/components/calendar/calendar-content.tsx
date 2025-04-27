@@ -5,13 +5,15 @@ import { api } from "@/http/api"
 import { useQuery } from "@tanstack/react-query"
 import { ScrollArea } from "../ui/scroll-area"
 import { CalendarDay } from "./calendar-day"
+import { QueryKeys } from "@/lib/query-keys"
 
 export const CalendarContent = () => {
 
     const { monthDays } = useCalendar()
+    const queryKey = QueryKeys()
 
     const { data: trainings, isLoading } = useQuery({
-        queryKey: ["find-many-trainings-by-user-id"],
+        queryKey: queryKey.findManyTrainingsByUserId(),
         queryFn: async () => {
 
             const { data } = await api.get<Training[]>("/trainings")

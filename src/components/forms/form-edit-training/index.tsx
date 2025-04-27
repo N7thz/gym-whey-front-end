@@ -18,7 +18,6 @@ import { useMutation } from "@tanstack/react-query"
 import { useHttp } from "@/http/api"
 import { toast } from "@/components/toast"
 import { useRouter } from "next/navigation"
-import { delay } from "@/utils/delay"
 
 type FormEditTrainingProps = { training: Training }
 
@@ -32,9 +31,6 @@ export const FormEditTraining = ({
     const { mutate, isPending } = useMutation({
         mutationKey: ["edit-training"],
         mutationFn: async (data: EditTrainingProps) => {
- 
-            await delay(5000)
-
             return await http.training.update({ id, ...data })
         },
         onSuccess() {
@@ -63,13 +59,11 @@ export const FormEditTraining = ({
         }
     })
 
-    const { handleSubmit, formState: { errors } } = methods
+    const { handleSubmit } = methods
 
     function onSubmit(data: EditTrainingProps) {
         mutate(data)
     }
-
-    console.log(errors)
 
     return (
         <Form

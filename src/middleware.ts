@@ -2,6 +2,7 @@ import type { MiddlewareConfig, NextRequest } from "next/server"
 import { NextResponse } from "next/server"
 import { api } from "./http/api"
 import type { AxiosError } from "axios"
+import { deleteCookie } from "cookies-next"
 
 const REDIRECT_WHEN_NOT_AUTHENTICATED_ROUTE = "/sign-in"
 
@@ -26,10 +27,13 @@ export async function middleware(request: NextRequest) {
 	}
 
 	if (!authToken && publicRoute) {
+		deleteCookie("token")
 		return NextResponse.next()
 	}
 
 	if (!authToken && !publicRoute) {
+
+		deleteCookie("token")
 
 		const redirectUrl = request.nextUrl.clone()
 

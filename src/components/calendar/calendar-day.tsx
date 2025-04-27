@@ -5,14 +5,15 @@ import { Training } from "@/@types"
 import { ScrollArea } from "../ui/scroll-area"
 import { DialogTitle, DialogTrigger, Dialog, DialogContent } from "../ui/dialog"
 import { DialogCalendarContent } from "./dialog-calendar/dialog-calendar-content"
+import { ComponentProps } from "react"
 
-type CalendarDayProps = {
+type CalendarDayProps = ComponentProps<typeof ScrollArea> & {
     day: Date
     trainings: Training[]
 }
 
 export const CalendarDay = ({
-    trainings, day
+    trainings, day, ...props
 }: CalendarDayProps) => {
 
     const { currentDate, selectedDate } = useCalendar()
@@ -21,11 +22,14 @@ export const CalendarDay = ({
     const isCurrentMonth = isSameMonth(day, currentDate)
 
     return (
-        <ScrollArea className={cn(
-            "h-[140px] p-2 border-2 rounded-md",
-            isToday && "border-violet-500 text-violet-500",
-            !isCurrentMonth && "text-muted-foreground border-muted border",
-        )}>
+        <ScrollArea
+            className={cn(
+                "h-[140px] p-2 border-2 rounded-md",
+                isToday && "border-violet-500 text-violet-500",
+                !isCurrentMonth && "text-muted-foreground border-muted border",
+            )}
+            {...props}
+        >
             <div
                 className="text-right"
                 children={format(day, "d")}

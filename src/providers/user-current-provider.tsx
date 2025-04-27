@@ -2,6 +2,7 @@
 
 import { UserResponse } from "@/@types"
 import { useHttp } from "@/http/api"
+import { QueryKeys } from "@/lib/query-keys"
 import { decodeToken } from "@/utils/decode-token"
 import { useQuery, type UseQueryResult } from "@tanstack/react-query"
 import { getCookie } from "cookies-next"
@@ -31,9 +32,10 @@ export function CurrentUserProvider({ children }: { children: ReactNode }) {
     const http = useHttp()
     const token = getCookie("token")
     const id = decodeToken(token)
+    const queryKey = QueryKeys()
     
     const response = useQuery({
-        queryKey: ["find-user", id],
+        queryKey: queryKey.findUser(id),
         queryFn: http.authenticate.authenticate,
         refetchOnWindowFocus: false,
     })

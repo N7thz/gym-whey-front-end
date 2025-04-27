@@ -1,17 +1,20 @@
 "use client"
 
 import { useQuery } from "@tanstack/react-query"
-import axios from "axios"
 import { FormEditTraining } from "./forms/form-edit-training"
 import { api } from "@/http/api"
+import { QueryKeys } from "@/lib/query-keys"
+import { Training } from "@/@types"
 
 export const GetTrainingById = ({ id }: { id: string }) => {
 
-    const { data: training, isLoading } = useQuery<any>({
-        queryKey: ["find-training-by-id", id],
+    const queryKeys = QueryKeys()
+
+    const { data: training, isLoading } = useQuery({
+        queryKey: queryKeys.findTrainingById(id),
         queryFn: async () => {
 
-            const { data } = await api.get(`/trainings/${id}`)
+            const { data } = await api.get<Training>(`/trainings/${id}`)
 
             return data
         },

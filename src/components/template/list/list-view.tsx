@@ -5,13 +5,15 @@ import { ListViewLoading } from "./list-view-loading"
 import { useHttp } from "@/http/api"
 import { useQuery } from "@tanstack/react-query"
 import { FormSearchTrainings } from "@/components/forms/form-search-trainings"
+import { QueryKeys } from "@/lib/query-keys"
 
 export const ListView = () => {
 
 	const http = useHttp()
+	const queryKey = QueryKeys()
 
 	const { data: trainings, isLoading } = useQuery({
-		queryKey: ["find-many-trainings-by-user-id"],
+		queryKey: queryKey.findManyTrainingsByUserId(),
 		queryFn: () => http.training.findMany()
 	})
 
